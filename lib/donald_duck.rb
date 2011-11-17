@@ -21,7 +21,6 @@ module DonaldDuck
     
   class Counter < ApiBase
     def push(value)
-      options = { :body => values(value), :basic_auth => @auth }
       self.class.post "/#{@widget_id}", options(value)
     end
   end
@@ -29,6 +28,43 @@ module DonaldDuck
   class Timeline < ApiBase
     def push(params = {})
       raise 'incorrect params, need to include: "title"'  unless params.keys.include?('title')
+      self.class.post "/#{@widget_id}", options(params)
+    end
+  end
+  
+  class Bar < ApiBase
+    def push(value)
+      self.class.post "/#{@widget_id}", options(value)
+    end
+  end
+  
+  class Box < ApiBase
+    def push(value)
+      self.class.post "/#{@widget_id}", options(value)
+    end
+  end
+  
+  class Pin < ApiBase
+    def push(value)
+      self.class.post "/#{@widget_id}", options(value)
+    end
+  end
+  
+  class Gauge < ApiBase
+    def push(value)
+      self.class.post "/#{@widget_id}", options(value)
+    end
+  end
+  
+  class Graph < ApiBase
+    def push(params = {})
+      self.class.post "/#{@widget_id}", options(params)
+    end
+  end
+  
+  class Image < ApiBase
+    def push(params = {})
+      raise 'incorrect params, need to include: "source"' unless params.keys.include?('source')
       self.class.post "/#{@widget_id}", options(params)
     end
   end
