@@ -22,13 +22,13 @@ module DonaldDuck
   class Counter < ApiBase
     def push(value)
       options = { :body => values(value), :basic_auth => @auth }
-      self.class.post "/#{@widget_id}", options
+      self.class.post "/#{@widget_id}", options(value)
     end
   end
   
   class Timeline < ApiBase
     def push(params = {})
-      raise 'incorrect params, need to include: "title"' if params.keys.include?('title')
+      raise 'incorrect params, need to include: "title"'  unless params.keys.include?('title')
       self.class.post "/#{@widget_id}", options(params)
     end
   end
